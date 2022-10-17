@@ -1,1 +1,3 @@
 npm i customize-cra react-app-rewired -D
+npm i -D sass
+npm install --save normalize.css

@@ -1,0 +1,21 @@
+@import 'normalize.css';
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../../assets/fonts/Roboto-Regular.ttf');
+}
+
+:root {
+  --primary: #fe2c55;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'roboto', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}

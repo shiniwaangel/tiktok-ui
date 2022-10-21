@@ -12,6 +12,7 @@
 }
 .container {
   width: var(--default-layout-container);
+  padding: 0px var(--default-layout-horizontal-spacer);
   height: 100%;
   display: flex;
   align-items: center;
@@ -92,4 +93,34 @@
   &:active {
     background-color: rgba(22, 24, 35, 0.06);
   }
+}
+
+//Actions
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.more-btn {
+  font-size: 2rem;
+  margin-left: 28px;
+  padding: 4px 8px;
+  background-color: transparent;
+}
+
+.action-btn {
+  font-size: 2.2rem;
+  color: #161823;
+  background-color: transparent;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 12px;
+  cursor: pointer;
 }

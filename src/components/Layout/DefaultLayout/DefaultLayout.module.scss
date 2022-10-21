@@ -5,6 +5,7 @@
 }
 .container {
   width: var(--default-layout-container);
+  padding: 0px var(--default-layout-horizontal-spacer);
   height: 100%;
   min-height: 1000px;
   display: flex;

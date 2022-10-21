@@ -1,44 +1,14 @@
 @import 'normalize.css';
 
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-Regular.ttf');
-}
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-Bold.ttf');
-  font-weight: bold;
-}
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-BoldItalic.ttf');
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-Italic.ttf');
-  font-style: italic;
-}
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-Light.ttf');
-  font-weight: 300;
-}
-@font-face {
-  font-family: 'roboto';
-  src: url('../../assets/fonts/Roboto-Medium.ttf');
-  font-weight: 500;
-}
-
 :root {
   --primary: #fe2c55;
   --black: #000;
   --white: #fff;
-  --text-color: #333;
+  --text-color: #161823;
 
   --default-layout-header-height: 60px;
   --default-layout-container: 1150px;
+  --default-layout-horizontal-spacer: 12px;
 }
 
 html {
@@ -69,4 +39,27 @@ input,
 a[href] {
   color: var(--text-color);
   text-decoration: none;
+}
+
+// Custom tippy tooltip
+body {
+  .tippy-box {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    background-color: rgba(84, 84, 84, 0.92);
+  }
+
+  .tippy-arrow {
+    color: rgba(84, 84, 84, 0.92);
+  }
+
+  .tippy-content {
+    padding: 8px 9px;
+  }
+
+  .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+    top: -8px;
+  }
 }

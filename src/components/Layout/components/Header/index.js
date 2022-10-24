@@ -26,6 +26,8 @@ import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Menu from '~/components/Popper/Menu';
+import { MessageIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -130,11 +132,18 @@ function Header() {
         </HeadlessTippy>
         <div className={cx('actions')}>
           {currentUser ? (
-            <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
-              <button className={cx('action-btn')}>
-                <FontAwesomeIcon icon={faCloudUpload} />
-              </button>
-            </Tippy>
+            <>
+              <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                <button className={cx('action-btn')}>
+                  <FontAwesomeIcon icon={faCloudUpload} />
+                </button>
+              </Tippy>
+              <Tippy delay={[0, 200]} content="Message" placement="bottom">
+                <button className={cx('action-btn')}>
+                  <MessageIcon />
+                </button>
+              </Tippy>
+            </>
           ) : (
             <>
               <Button text>Upload</Button>
@@ -143,7 +152,12 @@ function Header() {
           )}
           <Menu items={currentUser ? UserMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
-              <img className={cx('user-avatar')} src={images.avatar} alt="avatar" />
+              <Image
+                className={cx('user-avatar')}
+                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f22411ec3fa2c9325f97fce97be01322~c5_100x100.jpeg?x-expires=1666764000&x-signature=bH1H%2B1XZV%2BNNyP%2F5dn5OtAiT1UA%3D"
+                alt="avatar"
+                fallback={images.noImageUser}
+              />
             ) : (
               <button className={cx('more-btn')}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />

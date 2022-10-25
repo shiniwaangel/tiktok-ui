@@ -36,6 +36,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
 
   return (
     <Tippy
+    appendTo={document.body}
       delay={[0, 500]}
       interactive
       placement="bottom-end"

@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faLariSign, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
-import AccountItem from '~/components/AccountItem';
 import classNames from 'classnames/bind';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 
-import styles from './Search.module.scss';
+import { useDebounce } from '~/hook';
+import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { SearchIcon } from '~/components/Icons';
+import AccountItem from '~/components/AccountItem';
+import styles from './Search.module.scss';
+import * as searchServices from '~/apiServices/searchServices';
 
 const cx = classNames.bind(styles);
 
@@ -18,25 +20,25 @@ function Search() {
   const [loading, setLoading] = useState(false);
 
   const inputRef = useRef();
+  const debounced = useDebounce(searchValue, 500);
 
   useEffect(() => {
-    if(!searchValue.trim()){
+    if (!debounced.trim()) {
       setSearchResult([]);
       return;
     }
 
-    setLoading(true);
+    const fetchApi = async () => {
+      setLoading(true);
 
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-      .then(res => res.json())
-      .then(res => {
-        setSearchResult(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      })
-  }, [searchValue]);
+      const res = await searchServices.search(debounced);
+
+      setSearchResult(res);
+      setLoading(false);
+    }
+
+    fetchApi();
+  }, [debounced]);
 
   const handleInputChange = (val) => {
     setSearchValue(val);
@@ -72,11 +74,11 @@ function Search() {
       onClickOutside={handleHideResult}
     >
       <div className={cx('search')}>
-        <input 
+        <input
           ref={inputRef}
-          value={searchValue} 
-          placeholder="Search accounts and videos" 
-          spellCheck={false} 
+          value={searchValue}
+          placeholder="Search accounts and videos"
+          spellCheck={false}
           onChange={(e) => handleInputChange(e.target.value)}
           onFocus={() => setShowResult(true)}
         />

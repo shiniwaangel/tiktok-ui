@@ -40,8 +40,12 @@ function Search() {
     fetchApi();
   }, [debounced]);
 
-  const handleInputChange = (val) => {
-    setSearchValue(val);
+  const handleInputChange = (e) => {
+    const searchValue = e.target.value;
+
+    if (!searchValue.startsWith(' ')) {
+      setSearchValue(searchValue);
+    }
   }
 
   const handleClear = () => {
@@ -79,7 +83,7 @@ function Search() {
           value={searchValue}
           placeholder="Search accounts and videos"
           spellCheck={false}
-          onChange={(e) => handleInputChange(e.target.value)}
+          onChange={e => handleInputChange(e)}
           onFocus={() => setShowResult(true)}
         />
         {
@@ -90,7 +94,7 @@ function Search() {
           )
         }
         {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-        <button className={cx('search-btn')}>
+        <button className={cx('search-btn')} onMouseDown={e => e.preventDefault()}>
           <SearchIcon />
         </button>
       </div>

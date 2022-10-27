@@ -1,6 +1,4 @@
 import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
-import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
@@ -13,15 +11,18 @@ import {
   faGear,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
+import routesConfig from '~/config/routes';
+import styles from './Header.module.scss';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { MessageIcon } from '~/components/Icons';
 import Image from '~/components/Image';
+import images from '~/assets/images';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -89,7 +90,9 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('container')}>
-        <img src={images.logo} alt="tiktok" />
+        <Link to={routesConfig.home} className={cx('logo-link')}>
+          <img src={images.logo} alt="tiktok" />
+        </Link>
         <Search />
         <div className={cx('actions')}>
           {currentUser ? (

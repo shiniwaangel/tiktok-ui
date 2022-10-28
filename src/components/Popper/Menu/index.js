@@ -35,32 +35,37 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
   };
 
   return (
-    <Tippy
-      hideOnClick={hideOnClick}
-      appendTo={document.body}
-      delay={[0, 500]}
-      interactive
-      placement="bottom-end"
-      offset={[12, 8]}
-      render={(attrs) => (
-        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-          <PopperWrapper className={cx('menu-popper')}>
-            {history.length > 1 && (
-              <Header
-                title="Language"
-                onBack={() => {
-                  setHistory((prev) => prev.slice(0, prev.length - 1));
-                }}
-              />
-            )}
-            {renderItems()}
-          </PopperWrapper>
-        </div>
-      )}
-      onHide={() => setHistory((prev) => prev.slice(0, 1))}
-    >
-      {children}
-    </Tippy>
+    //Using a wrapper <div> or <span> tag around the reference element solves this 
+    //by creating a new parentNode context. 
+    <div>
+      <Tippy
+        hideOnClick={hideOnClick}
+        delay={[0, 500]}
+        interactive
+        placement="bottom-end"
+        offset={[12, 8]}
+        render={(attrs) => (
+          <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper')}>
+              {history.length > 1 && (
+                <Header
+                  title="Language"
+                  onBack={() => {
+                    setHistory((prev) => prev.slice(0, prev.length - 1));
+                  }}
+                />
+              )}
+              <div className={cx('menu-body')}>
+                {renderItems()}
+              </div>
+            </PopperWrapper>
+          </div>
+        )}
+        onHide={() => setHistory((prev) => prev.slice(0, 1))}
+      >
+        {children}
+      </Tippy>
+    </div>
   );
 }
 

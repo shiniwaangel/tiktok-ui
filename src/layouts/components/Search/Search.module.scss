@@ -20,6 +20,7 @@
     flex: 1;
     font-family: var(--font-family);
     caret-color: var(--primary);
+    padding-right: 40px;
   }
 
   input:not(:placeholder-shown) ~ .search-btn {
@@ -62,11 +63,11 @@
   animation: spinning 0.8s linear infinite;
 }
 
-@keyframes spinning{
-  from{
+@keyframes spinning {
+  from {
     transform: translate(0%, -50%) rotate(0);
   }
-  to{
+  to {
     transform: translate(0%, -50%) rotate(360deg);
   }
 }
